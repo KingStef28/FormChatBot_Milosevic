@@ -24,6 +24,7 @@ namespace FormChatBot_Milosevic
         byte[] sendBuff = new byte[256];
         byte[] recvBuff = new byte[256];
         int recvBytes = 0;
+
         public Form1()
         {
             InitializeComponent();
@@ -37,7 +38,6 @@ namespace FormChatBot_Milosevic
 
         private void btn_connect_Click(object sender, EventArgs e)
         {
-
             strIPAddress = txt_severip.Text;
             strPort = txt_serverport.Text;
             if (!IPAddress.TryParse(strIPAddress.Trim(), out ipAddr))
@@ -81,7 +81,6 @@ namespace FormChatBot_Milosevic
             {
                 errore.Text = ex.Message;
             }
-
         }
 
         private void btn_Send_Click(object sender, EventArgs e)
@@ -94,7 +93,6 @@ namespace FormChatBot_Milosevic
                 recvBytes = client.Receive(recvBuff);
                 recvString = Encoding.ASCII.GetString(recvBuff);
 
-
                 lstbox_messagio_server.Items.Add("Client: " + txt_mesaggio.Text);
                 string[] subs = recvString.Split(';');
 
@@ -104,9 +102,6 @@ namespace FormChatBot_Milosevic
                     lstbox_messagio_server.Items.Add(element);
                 }
 
-                //lo scrivo a video
-
-
                 //Pulisco le variabili
                 Array.Clear(recvBuff, 0, recvBuff.Length);
                 Array.Clear(sendBuff, 0, sendBuff.Length);
@@ -114,7 +109,6 @@ namespace FormChatBot_Milosevic
                 sendString = "";
                 recvBytes = 0;
                 txt_mesaggio.Text = "";
-
             }
 
             if (txt_mesaggio.Text.ToUpper().Trim() == "QUIT")
@@ -132,7 +126,6 @@ namespace FormChatBot_Milosevic
                 txt_severip.Enabled = true;
                 txt_serverport.Enabled = true;
                 btn_connect.Enabled = true;
-
             }
         }
     }
